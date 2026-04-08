@@ -1,0 +1,41 @@
+@use '/src/common/styles/colors' as *;
+@use '/src/common/styles/widths' as *;
+@use '/src/common/styles/mixins' as *;
+@use '/src/common/styles/inherits' as *;
+ 
+$indent: 10px;
+
+.task {
+  @include border-radius(8px);
+  width: $width * 2;
+  min-width: $min-width;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: $border-width solid black;
+  padding: 0 $indent;
+  margin: $indent - 2;
+  background-color: $colorBG;
+  &:hover {
+   @extend %hover;
+  }
+  p:first-child {
+    margin-right: auto;
+    @include font(26px, serif, 600);
+    text: {
+      shadow: 2px 2px 2px white;
+      decoration: {
+        line: overline;
+        style: dotted;
+      }
+    }
+  }
+  button {
+    @include border-radius(4px);
+    @include font(20px, Arial, 900);
+    margin-left: $indent;
+    &:hover {
+     @extend %hover;
+    }
+  }
+}
