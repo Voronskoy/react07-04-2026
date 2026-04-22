@@ -1,12 +1,45 @@
-import DragElement from './components/DragElement/DragElement';
+import { useState, useEffect } from 'react';
+import Wrapper from './components/Wrapper/Wrapper';
+import Timer from './components/Timer/Timer';
+import ModalWindow from './components/ModalWindow/ModalWindow';
 
 function App() {
+  const [isOpenModal, setIsOpenModal] = useState(false);
+  useEffect(() => {
+    const idTimeOut = setTimeout(() => {
+      setIsOpenModal(true)
+    }, 2000);
+    return () => {
+      clearTimeout(idTimeOut);
+    };
+  }, []);
+  const closeModal = ()=>{setIsOpenModal(false)}
   return (
     <>
-      <DragElement text='1' left={325} top={25}/>
-      <DragElement text='2' left={125} top={125}/>
-      <DragElement text='3' left={225} top={225}/>
-      <DragElement />
+      {isOpenModal && (
+        <ModalWindow closeModal={closeModal}>
+          <h3>modal window</h3>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam
+            quae ipsam libero deleniti ut suscipit.
+          </p>
+        </ModalWindow>
+      )}
+      <Wrapper>
+        <h2>Timer</h2>
+        <Timer />
+      </Wrapper>
+      <Wrapper>
+        <h2>Hi!</h2>
+      </Wrapper>
+      <Wrapper>
+        <h2>Hello!</h2>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi
+          voluptates maiores provident ullam necessitatibus, illo debitis neque
+          molestiae dicta odio!
+        </p>
+      </Wrapper>
     </>
   );
 }
